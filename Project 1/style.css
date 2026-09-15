@@ -1,0 +1,85 @@
+/* Import Sen Font */
+@import url("https://fonts.googleapis.com/css2?family=Sen&display=swap");
+
+*, *::before, *::after 
+{
+    box-sizing: border-box;
+}
+
+* 
+{   
+    font-family: Sen, sans-serif;
+    
+    margin: 0;
+}
+
+body
+{
+    background-color: #1f1f1f;
+}
+
+/* Header */
+.header
+{
+    position: sticky;
+    top: 0;
+
+    background-color: color-mix(in srgb, #1f1f1f 90%, transparent);
+    backdrop-filter: blur(10px);
+
+    border-bottom: solid 2px #100e09;
+}
+
+.header-content
+{
+    display: flex;
+    flex-wrap : wrap;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 20px;
+}
+
+.brand
+{
+    color: #a0a0a0;
+    text-decoration: none;
+}
+
+/* Navbar */
+.navbar
+{
+    display: flex;
+    flex-flow: row wrap;
+    
+    align-items: center;
+    gap: .25em;
+
+    font-size: 20px;
+}
+
+.navbar a
+{
+    color: #a0a0a0;
+    text-decoration: none;
+    
+    padding: .2em .75em;
+    border-radius: 15px;
+}
+
+.navbar a[aria-current = "page"], .navbar a:hover, .navbar a:focus
+{
+    color: #ffffff;
+}
+
+.navbar .discord-tab
+{
+    color: #ffffff;
+    background-color: #5865f2;
+}
+
+.navbar .discord-tab:hover, .navbar .discord-tab:focus
+{
+    background-color: #4752c4;
+}
