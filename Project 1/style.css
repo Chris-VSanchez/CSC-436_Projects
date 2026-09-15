@@ -21,13 +21,9 @@ body
 /* Header */
 .header
 {
-    position: sticky;
-    top: 0;
+    background-color: #1f1f1f;
 
-    background-color: color-mix(in srgb, #1f1f1f 90%, transparent);
-    backdrop-filter: blur(10px);
-
-    border-bottom: solid 2px #100e09;
+    border-bottom: solid 2px #181818;
 }
 
 .header-content
@@ -82,4 +78,102 @@ body
 .navbar .discord-tab:hover, .navbar .discord-tab:focus
 {
     background-color: #4752c4;
+}
+
+/* Hero Section */
+.hero
+{
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background: linear-gradient(to right, #a200ea , #15c2ff);
+
+    min-height: 80vh;
+
+    padding: 60px 20px;
+}
+
+.hero p
+{
+    margin-bottom: 15px;
+
+    font-size: large;
+    font-weight: 500;
+    letter-spacing: .15em;
+}
+
+.hero h1
+{
+    margin-bottom: 10px;
+
+    font-size: 3em;
+    font-weight: 800;
+}
+
+.hero h2
+{
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+.hero span
+{
+    display: flex;
+    flex-flow: row wrap;
+    
+    justify-content: center;
+
+    gap: 15px;
+}
+
+.hero-button
+{
+    background-color: #1a1a1a;
+    color: #ffffff;
+    text-decoration: none;
+
+    font-size: larger;
+
+    padding: .4em .75em;
+    border-radius: 15px;
+}
+
+/* Marquee */
+.marquee
+{
+    overflow: hidden;
+    white-space: nowrap;
+
+    width: 100%;
+
+    background: repeating-linear-gradient(
+        -45deg,
+        #ffed21,
+        #ffed21 30px,
+        #ffd663 30px,
+        #ffd663 60px
+    );
+
+    color: #111111;
+
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.marquee-text 
+{
+    display: inline-block;
+    width: 100%;
+    animation: scroll-left 10s linear infinite;
+}
+
+@keyframes scroll-left 
+{
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
 }
