@@ -315,3 +315,105 @@ body
 
     text-align: center;
 }
+
+/* About Us Section */
+.about
+{
+    padding: 60px 24px;
+}
+
+.about-hero
+{
+    text-align: center;
+
+    margin: 0 auto 60px auto;
+}
+
+.about h1
+{
+    color: #ffffff;
+
+    font-size: 3rem;
+    font-weight: bold;
+    
+    line-height: 1.2;
+
+    margin-bottom: 20px;
+}
+
+.about p
+{
+    color: #c0c0c0;
+
+    font-size: 1.2rem;
+    
+    line-height: 1.7;
+}
+
+/* Mission Section */
+.mission
+{
+    align-items: center;
+
+    background: #181818;
+    
+    border: 2px solid #282828;
+    border-radius: 20px;
+    
+    padding: 45px;
+    margin-bottom: 60px;
+    
+    gap: 40px;
+}
+
+.mission h2
+{
+    color: #ffffff;
+
+    font-size: 2.2rem;
+    font-weight: 800;
+
+    margin-bottom: 16px;
+}
+
+.event-grid
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    
+    gap: 24px;
+}
+
+.event-card 
+{
+    display: flex;
+    flex-direction: column;
+
+    background: #181818;
+    
+    border: 1px solid #282828;
+    border-radius: 16px;
+    
+    text-align: left;
+
+    padding: 35px 30px;
+    
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.event-card:hover
+{
+    transform: translateY(-6px); 
+
+    border: 1px solid #15c2ff;
+}
+
+.event-card h3
+{
+    color: #ffffff;
+    
+    font-size: 1.4rem;
+    font-weight: 700;
+
+    margin-bottom: 12px;
+}
