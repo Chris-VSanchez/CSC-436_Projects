@@ -292,3 +292,26 @@ body
 {
     padding-left: 10px;
 }
+
+/* Footer */
+.footer
+{
+    background-color: #1f1f1f;
+
+    padding: 10px 20px;
+
+    border-top: solid 2px #181818;
+
+    margin-top: 2em;
+}
+
+.footer p
+{
+    color: #a0a0a0;
+
+    padding: 4px 15px;
+
+    font-size: 20px;
+
+    text-align: center;
+}
