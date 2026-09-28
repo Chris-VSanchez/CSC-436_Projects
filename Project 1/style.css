@@ -161,6 +161,7 @@ body
 .marquee 
 {
     display: flex;
+    flex-shrink: 0;
     
     align-items: center;
     
@@ -168,7 +169,7 @@ body
     
     gap: 2rem;
     
-    animation: marquee 12s linear infinite;
+    animation: marquee 20s linear infinite;
 }
 
 .marquee-item 
@@ -193,12 +194,12 @@ body
 
 @keyframes marquee 
 {
-    0% 
+    from
     {
         transform: translateX(100%);
     }
 
-    100% 
+    to
     {
         transform: translateX(-100%);
     }
@@ -214,7 +215,7 @@ body
 
 .leaders p
 {
-    color: #ffffff;
+    color: #d4af37;
 
     margin-bottom: 15px;
 
@@ -238,31 +239,44 @@ body
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
     
-    gap: 12px;
+    gap: 20px;
     
     width: 100%;
+
+    margin: 0 auto;
     padding: 10px 20px;
 }
 
 .leader-card
 {
+    display: flex;
+    flex-direction: column;
+    
+    position: relative;
+
+    overflow: hidden;
+
     background: #ffffff;
     
-    border: none;
-    border-radius: 14px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 12px;
 
     height: 250px;
 
-    transition: 0.2s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .leader-card:hover
 { 
     transform: translateY(-6px); 
+
+    border-color: #d4af37;
 }
 
 .leader-background-container 
 {
+    position: relative;
+
     overflow: hidden;
 
     width: 100%;
@@ -284,8 +298,14 @@ body
 
 .leader-card p
 {
+    color: #d4af37;
+    
     margin-top: 30px;
     padding-left: 10px;
+
+    letter-spacing: 0.05em;
+
+    text-transform: uppercase;
 }
 
 .leader-card h2
@@ -416,4 +436,15 @@ body
     font-weight: 700;
 
     margin-bottom: 12px;
+}
+
+/* Media Queries */
+@media (prefers-reduced-motion: reduce) 
+{
+    .marquee 
+    {
+        justify-content: center;
+
+        animation: none;
+    }
 }
