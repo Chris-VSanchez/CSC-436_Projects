@@ -133,8 +133,9 @@ body
 
 .hero-button
 {
-    background-color: #1a1a1a;
     color: #ffffff;
+    background-color: #1a1a1a;
+
     text-decoration: none;
 
     font-size: larger;
@@ -338,6 +339,49 @@ body
 }
 
 .leader-button:hover
+{
+    background-color: #000000;
+}
+
+.contact-info
+{
+    margin-top: 2px;
+    margin-bottom: 5px;
+    
+    padding-left: 10px;
+
+    overflow-wrap: break-word;
+}
+
+.contact-info p
+{
+    color: #000000;
+
+    padding: 0;
+
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.hide-info
+{
+    color: #ffffff;
+    background-color: #1a1a1a;
+
+    text-decoration: none;
+
+    font-size: small;
+
+    margin: 2px auto;
+    padding: .4em .75em;
+
+    border: none;
+    border-radius: 15px;
+
+    width: fit-content;
+}
+
+.hide-info:hover
 {
     background-color: #000000;
 }

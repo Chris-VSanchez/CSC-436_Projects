@@ -47,7 +47,7 @@ for( let leader of leaderInformation)
             <img src = "background.svg" class = "leader-background">
         </div>
                     
-        <button class = "leader-button">Contact Info</button>
+        <button data-id = "${leader.id}" class = "leader-button">Contact Info</button>
 
         <p>${leader.role}</p>
         <h2>${leader.leaderName}</h2>
@@ -55,3 +55,54 @@ for( let leader of leaderInformation)
 
     leaderSection.append(leaderCard);
 }
+
+// Contact Information Event Listener
+leaderSection.addEventListener("click", (e) => 
+{
+    const btn = e.target.closest("[data-id]");
+
+// Show Contact Information
+    if( btn) 
+    {
+        const leaderId = Number(btn.dataset.id);
+
+        const leader = leaderInformation.find(leader => leader.id === leaderId);
+
+        if( !leader) 
+            return;
+
+        const leaderCard = btn.closest(".leader-card");
+
+        // Hide Contact Info button
+        btn.style.display = "none";
+
+        // Add contact information to card
+        leaderCard.insertAdjacentHTML(
+            "beforeend",
+            `
+            <div class = "contact-info">
+                ${leader.primaryContact ? "<h4>Primary Contact</h4>" : ""}
+                <p>Email: ${leader.email}</p>
+
+                <button class = "hide-info">Hide Info</button>
+            </div>
+            `);
+
+        return;
+    }
+
+
+// Hide Information
+    const hideBtn = e.target.closest(".hide-info");
+
+    if( hideBtn) 
+    {
+        const leaderCard = hideBtn.closest(".leader-card");
+
+        // Remove contact information
+        leaderCard.querySelector(".contact-info").remove();
+
+        // Show Contact Info button
+        leaderCard.querySelector(".leader-button").style.display = "block";
+    }
+});
