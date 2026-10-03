@@ -143,6 +143,11 @@ body
     border-radius: 15px;
 }
 
+.hero-button:hover
+{
+    background-color: #000000;
+}
+
 /* Marquee */
 .marquee-section 
 {
@@ -300,7 +305,6 @@ body
 {
     color: #d4af37;
     
-    margin-top: 30px;
     padding-left: 10px;
 
     letter-spacing: 0.05em;
@@ -311,6 +315,31 @@ body
 .leader-card h2
 {
     padding-left: 10px;
+}
+
+.leader-button
+{
+    color: #ffffff;
+    background-color: #1a1a1a;
+    
+    align-self: flex-end;
+
+    text-decoration: none;
+
+    font-size: medium;
+
+    margin: 5px 5px 0 5px;
+    padding: .4em .75em;
+
+    border: none;
+    border-radius: 15px;
+
+    width: fit-content;
+}
+
+.leader-button:hover
+{
+    background-color: #000000;
 }
 
 /* Footer */
