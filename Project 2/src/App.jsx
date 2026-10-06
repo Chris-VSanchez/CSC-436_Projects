@@ -1,29 +1,29 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+import { useState, useEffect } from "react";
+import Counter from "./Components/Counter";
 
-function App() 
+const counterList =
+[
+  { id: 1 , tick: 1000 }, 
+  { id: 2 , tick: 2000 }, 
+  { id: 3 , tick: 3000 } 
+];
+
+function App()
 {
-  const [count, setCount] = useState(0);
-  const [counting, setCounting] = useState(true);
+  const [activeCounter, setActiveCounter] = useState(0);
 
-  useEffect(() =>
+  function toggleCounter(id)
   {
-    if( !counting)
-      return;
-
-    const timer = setInterval(() => setCount(c => c + 1) , 1000);
-    return () => clearInterval(timer);
-  } , [counting]);
-
-  function toggleButton()
-  {
-    setCounting(counting => !counting);
+    activeCounter === id ? setActiveCounter(0) : setActiveCounter(id)
   }
 
   return (
     <>
-      <p>Count: {count}</p>
-      <button onClick = {toggleButton}>{counting ? "Currently Counting" : "Count"}</button>
+      { counterList.map(counter => <Counter 
+        key = {counter.id} id = {counter.id} 
+        activeCounter = {activeCounter} time = {counter.tick} 
+        onActivation = {toggleCounter} />)
+      }
     </>
   );
 }
