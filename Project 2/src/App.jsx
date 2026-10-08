@@ -1,15 +1,16 @@
-import { useState, useEffect } from "react";
-import Counter from "./Components/Counter";
+import { useEffect, useState } from "react";
+import Item from "./Components/Item";
 
-const counterList =
+const itemList = 
 [
-  { id: 1 , tick: 1000 }, 
-  { id: 2 , tick: 2000 }, 
-  { id: 3 , tick: 3000 } 
-];
+  { id: 1 , itemName: "First Tree" , tick: 750 , count: 0 },
+  { id: 2 , itemName: "Second Tree" , tick: 1250 , count: 0 },
+  { id: 3 , itemName: "Third Tree" , tick: 2000 , count: 0 }
+]
 
 function App()
 {
+  const [items, setItems] = useState(itemList);
   const [activeCounter, setActiveCounter] = useState(0);
 
   function toggleCounter(id)
@@ -17,12 +18,18 @@ function App()
     activeCounter === id ? setActiveCounter(0) : setActiveCounter(id)
   }
 
+  function generateItem(id)
+  {
+    setItems(currentItems => currentItems.map(item => 
+      item.id === id ? { ...item, count: item.count + 1 } : item ));
+  }
+  
   return (
     <>
-      { counterList.map(counter => <Counter 
-        key = {counter.id} id = {counter.id} 
-        activeCounter = {activeCounter} time = {counter.tick} 
-        onActivation = {toggleCounter} />)
+      { items.map(item => <Item 
+        key = {item.id}  item = {item} 
+        activeCounter = {activeCounter} onActivation = {toggleCounter} 
+        generateItem = {generateItem} />)
       }
     </>
   );
