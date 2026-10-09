@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Item from "./Components/Item";
+import Bank from "./Components/Bank";
 
 const itemList = 
 [
-  { id: 1 , itemName: "First Tree" , tick: 750 , count: 0 },
-  { id: 2 , itemName: "Second Tree" , tick: 1250 , count: 0 },
-  { id: 3 , itemName: "Third Tree" , tick: 2000 , count: 0 }
+  { id: 1 , itemName: "First Tree" , tick: 750 },
+  { id: 2 , itemName: "Second Tree" , tick: 1250 },
+  { id: 3 , itemName: "Third Tree" , tick: 2000 }
 ]
 
 function App()
 {
-  const [items, setItems] = useState(itemList);
+  const [inventory, setInventory] = useState([]);
   const [activeCounter, setActiveCounter] = useState(0);
 
   function toggleCounter(id)
@@ -20,13 +21,29 @@ function App()
 
   function generateItem(id)
   {
-    setItems(currentItems => currentItems.map(item => 
-      item.id === id ? { ...item, count: item.count + 1 } : item ));
+    const item = itemList.find(item => item.id === id);
+
+    if( !item)
+      return;
+
+    setInventory(currentInventory =>
+    {
+      const itemExists = currentInventory.find(inventoryItem => inventoryItem.id === id);
+
+      if( itemExists)
+      {
+        return currentInventory.map(inventoryItem => 
+          inventoryItem.id === id ? {...inventoryItem, count: inventoryItem.count + 1} : inventoryItem);
+      }
+
+      return [...currentInventory, {id: item.id , itemName: item.itemName , count: 1}];
+    });
   }
-  
+
   return (
     <>
-      { items.map(item => <Item 
+      <Bank inventory = {inventory} />
+      { itemList.map(item => <Item 
         key = {item.id}  item = {item} 
         activeCounter = {activeCounter} onActivation = {toggleCounter} 
         generateItem = {generateItem} />)

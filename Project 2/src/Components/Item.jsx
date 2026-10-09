@@ -17,11 +17,7 @@ function Item( { item, activeCounter, onActivation, generateItem } )
   return (
     <div>
         <h3>{item.itemName}</h3>
-
-        <p>Count: {item.count}</p>
-
         <button onClick = {() => onActivation(item.id)}>{isCounting ? "Stop Generating" : "Start Generating"}</button>
-
     </div>
   );
 }
