@@ -1,27 +1,28 @@
 import { useState } from "react";
-import Item from "./Components/Item";
-import Bank from "./Components/Bank";
 
-const itemList = 
+import Action from "./Components/Action";
+import Inventory from "./Components/Inventory";
+
+const actionList = 
 [
-  { id: 1 , itemName: "First Tree" , tick: 750 },
-  { id: 2 , itemName: "Second Tree" , tick: 1250 },
-  { id: 3 , itemName: "Third Tree" , tick: 2000 }
+  { id: 1 , source: "Normal Tree" , produces: "Normal Logs" , tick: 900 },
+  { id: 2 , source: "Oak Tree" , produces: "Oak Logs" , tick: 1200 },
+  { id: 3 , source: "Willow Tree" , produces: "Willow Logs" , tick: 1500 }
 ]
 
 function App()
 {
   const [inventory, setInventory] = useState([]);
-  const [activeCounter, setActiveCounter] = useState(0);
+  const [activeAction, setActiveAction] = useState(0);
 
   function toggleCounter(id)
   {
-    activeCounter === id ? setActiveCounter(0) : setActiveCounter(id)
+    activeAction === id ? setActiveAction(0) : setActiveAction(id)
   }
 
   function generateItem(id)
   {
-    const item = itemList.find(item => item.id === id);
+    const item = actionList.find(item => item.id === id);
 
     if( !item)
       return;
@@ -36,18 +37,22 @@ function App()
           inventoryItem.id === id ? {...inventoryItem, count: inventoryItem.count + 1} : inventoryItem);
       }
 
-      return [...currentInventory, {id: item.id , itemName: item.itemName , count: 1}];
+      return [...currentInventory, {id: item.id , itemName: item.produces , count: 1}];
     });
   }
 
   return (
     <>
-      <Bank inventory = {inventory} />
-      { itemList.map(item => <Item 
-        key = {item.id}  item = {item} 
-        activeCounter = {activeCounter} onActivation = {toggleCounter} 
+    
+      <Inventory inventory = {inventory} />
+      
+      { 
+        actionList.map(action => <Action 
+        key = {action.id}  action = {action} 
+        activeAction = {activeAction} onActivation = {toggleCounter} 
         generateItem = {generateItem} />)
       }
+
     </>
   );
 }
