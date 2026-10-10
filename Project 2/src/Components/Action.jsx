@@ -3,21 +3,21 @@ import './components.css'
 
 function Action( { action, activeAction, onActivation, generateItem } ) 
 {
-  const isCounting = activeAction === action.id;
+  const isActive = activeAction === action.id;
 
   useEffect(() =>
   {
-    if( !isCounting)
+    if( !isActive)
       return;
 
     const timer = setInterval(() => generateItem(action.id) , action.tick);
     return () => clearInterval(timer);
-  } , [isCounting, action.id, action.tick, generateItem]);
+  } , [isActive, action.id, action.tick, generateItem]);
 
   return (
     <div>
         <h3>{action.source}</h3>
-        <button onClick = {() => onActivation(action.id)}>{isCounting ? "Stop Generating" : "Start Generating"}</button>
+        <button onClick = {() => onActivation(action.id)}>{isActive ? "Stop Generating" : "Start Generating"}</button>
     </div>
   );
 }

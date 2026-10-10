@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 
 import Action from "./Components/Action";
 import Inventory from "./Components/Inventory";
 
 const actionList = 
 [
-  { id: 1 , source: "Normal Tree" , produces: "Normal Logs" , tick: 900 },
-  { id: 2 , source: "Oak Tree" , produces: "Oak Logs" , tick: 1200 },
-  { id: 3 , source: "Willow Tree" , produces: "Willow Logs" , tick: 1500 }
+  { id: 1 , source: "Normal Tree" , action: "Cut" , produces: "Normal Logs" , tick: 900 },
+  { id: 2 , source: "Oak Tree" , action: "Cut" , produces: "Oak Logs" , tick: 1200 },
+  { id: 3 , source: "Willow Tree" , action: "Cut" , produces: "Willow Logs" , tick: 1500 },
+  { id: 4 , source: "Firemaking" , action: "Burn" , produces: "Ash" , tick: 2000 , requires: { itemId: 1 , quantity: 2 } }, 
 ]
 
 function App()
@@ -15,35 +16,83 @@ function App()
   const [inventory, setInventory] = useState([]);
   const [activeAction, setActiveAction] = useState(0);
 
+  function meetsRequirements(action, inventory)
+  {
+    if( !action.requires)
+      return true;
+
+    const requiredItem = inventory.find(item => item.id === action.requires.itemId);
+
+    return (requiredItem && requiredItem.count) >= action.requires.quantity;
+  }
+
+  useEffect(() => 
+  {
+    if( activeAction === 0) 
+      return;
+
+    const action = actionList.find(action => action.id === activeAction);
+
+    if( !action || !meetsRequirements(action, inventory))
+      setActiveAction(0);
+  }, [inventory, activeAction]);
+
   function toggleCounter(id)
   {
-    activeAction === id ? setActiveAction(0) : setActiveAction(id)
+    if( activeAction === id) 
+    {
+      setActiveAction(0);
+      return;
+    }
+
+    const action = actionList.find(action => action.id === id);
+
+    if( !action || !meetsRequirements(action, inventory))
+      return;
+
+    setActiveAction(id);
   }
 
   function generateItem(id)
   {
-    const item = actionList.find(item => item.id === id);
+    const action = actionList.find(action => action.id === id);
 
-    if( !item)
+    if( !action)
       return;
+
+    if( !meetsRequirements(action, inventory))
+    {
+      setActiveAction(currentAction => currentAction === id ? 0 : currentAction);
+        
+      return;
+    }
 
     setInventory(currentInventory =>
     {
-      const itemExists = currentInventory.find(inventoryItem => inventoryItem.id === id);
+      let updatedInventory = currentInventory;
+      
+      if( action.requires)
+      {
+        updatedInventory = currentInventory.map(item => 
+          item.id === action.requires.itemId ? {...item, count: item.count - action.requires.quantity} : item)
+        .filter(item => item.count > 0);
+      }
+
+      const itemExists = updatedInventory.find(item => item.id === id);
 
       if( itemExists)
       {
-        return currentInventory.map(inventoryItem => 
-          inventoryItem.id === id ? {...inventoryItem, count: inventoryItem.count + 1} : inventoryItem);
+        return updatedInventory.map(item => 
+          item.id === id ? {...item, count: item.count + 1} : item);
       }
 
-      return [...currentInventory, {id: item.id , itemName: item.produces , count: 1}];
+      return [...updatedInventory, {id: action.id , itemName: action.produces , count: 1}];
     });
   }
 
   return (
     <>
-    
+
       <Inventory inventory = {inventory} />
       
       { 
