@@ -3,91 +3,39 @@ import { useState , useEffect } from "react";
 import Action from "./Components/Action";
 import Inventory from "./Components/Inventory";
 
-const actionList = 
-[
-  { id: 1 , source: "Normal Tree" , action: "Cut" , produces: "Normal Logs" , tick: 900 },
-  { id: 2 , source: "Oak Tree" , action: "Cut" , produces: "Oak Logs" , tick: 1200 },
-  { id: 3 , source: "Willow Tree" , action: "Cut" , produces: "Willow Logs" , tick: 1500 },
-  { id: 4 , source: "Firemaking" , action: "Burn" , produces: "Ash" , tick: 2000 , requires: { itemId: 1 , quantity: 2 } }, 
-]
+import { actionList , meetsRequirements} from './gameLogic';
 
 function App()
 {
   const [inventory, setInventory] = useState([]);
-  const [activeAction, setActiveAction] = useState(0);
-
-  function meetsRequirements(action, inventory)
-  {
-    if( !action.requires)
-      return true;
-
-    const requiredItem = inventory.find(item => item.id === action.requires.itemId);
-
-    return (requiredItem && requiredItem.count) >= action.requires.quantity;
-  }
+  const [activeAction, setActiveAction] = useState(null);  
 
   useEffect(() => 
   {
-    if( activeAction === 0) 
+    if( activeAction === null) 
       return;
 
-    const action = actionList.find(action => action.id === activeAction);
+    const action = actionList.find(action => action.source === activeAction);
 
     if( !action || !meetsRequirements(action, inventory))
-      setActiveAction(0);
+      setActiveAction(null);
+
   }, [inventory, activeAction]);
 
-  function toggleCounter(id)
+  function toggleAction(source)
   {
-    if( activeAction === id) 
+    if( activeAction === source) 
     {
-      setActiveAction(0);
+      setActiveAction(null);
       return;
     }
 
-    const action = actionList.find(action => action.id === id);
+    const action = actionList.find(action => action.source === source);
 
     if( !action || !meetsRequirements(action, inventory))
       return;
 
-    setActiveAction(id);
-  }
-
-  function generateItem(id)
-  {
-    const action = actionList.find(action => action.id === id);
-
-    if( !action)
-      return;
-
-    if( !meetsRequirements(action, inventory))
-    {
-      setActiveAction(currentAction => currentAction === id ? 0 : currentAction);
-        
-      return;
-    }
-
-    setInventory(currentInventory =>
-    {
-      let updatedInventory = currentInventory;
-      
-      if( action.requires)
-      {
-        updatedInventory = currentInventory.map(item => 
-          item.id === action.requires.itemId ? {...item, count: item.count - action.requires.quantity} : item)
-        .filter(item => item.count > 0);
-      }
-
-      const itemExists = updatedInventory.find(item => item.id === id);
-
-      if( itemExists)
-      {
-        return updatedInventory.map(item => 
-          item.id === id ? {...item, count: item.count + 1} : item);
-      }
-
-      return [...updatedInventory, {id: action.id , itemName: action.produces , count: 1}];
-    });
+    setActiveAction(source);
   }
 
   return (
@@ -97,9 +45,9 @@ function App()
       
       { 
         actionList.map(action => <Action 
-        key = {action.id}  action = {action} 
-        activeAction = {activeAction} onActivation = {toggleCounter} 
-        generateItem = {generateItem} />)
+        key = {action.source}  action = {action} 
+        activeAction = {activeAction} onActivation = {toggleAction} 
+        setInventory = {setInventory} />)
       }
 
     </>

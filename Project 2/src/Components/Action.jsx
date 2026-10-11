@@ -1,23 +1,27 @@
 import { useEffect } from 'react'
+
+import { updateInventory } from '../gameLogic';
 import './components.css'
 
-function Action( { action, activeAction, onActivation, generateItem } ) 
+function Action( { action, activeAction, onActivation, setInventory } )
 {
-  const isActive = activeAction === action.id;
+  const isActive = activeAction === action.source;
 
   useEffect(() =>
   {
     if( !isActive)
       return;
 
-    const timer = setInterval(() => generateItem(action.id) , action.tick);
+    const timer = setInterval(() => setInventory(currentInventory => updateInventory(action.source, currentInventory)) , action.tick);
+    
     return () => clearInterval(timer);
-  } , [isActive, action.id, action.tick, generateItem]);
+
+  } , [isActive, action.source, action.tick, setInventory]);
 
   return (
     <div>
         <h3>{action.source}</h3>
-        <button onClick = {() => onActivation(action.id)}>{isActive ? "Stop Generating" : "Start Generating"}</button>
+        <button onClick = {() => onActivation(action.source)}>{isActive ? "Stop Generating" : "Start Generating"}</button>
     </div>
   );
 }
