@@ -4,9 +4,16 @@ import ItemSelector from './ItemSelector'
 import { updateInventory } from '../gameLogic';
 import './components.css'
 
-function Action( { action , activeAction , onActivation , setInventory , selectedItem , onItemSelect } )
+function Action( { action , activeAction , onActivation , setInventory , selectedItems , onItemSelect } )
 {
   const isActive = activeAction === action.source;
+  
+  const selectedItem = selectedItems[action.source] ?? null;
+
+  function handleItemSelect(itemId) 
+  {
+    onItemSelect(current => ({...current, [action.source]: itemId}));
+  }
 
   useEffect(() =>
   {
@@ -32,11 +39,11 @@ function Action( { action , activeAction , onActivation , setInventory , selecte
           <ItemSelector 
           requirements = {action.requiresAny}
           selectedItem = {selectedItem}
-          onItemSelect = {onItemSelect} />)
+          onItemSelect = {handleItemSelect} />)
         }
 
         <button onClick = {() => onActivation(action.source)}>{isActive ? "Stop Generating" : "Start Generating"}</button>
-        
+
     </div>
   );
 }
