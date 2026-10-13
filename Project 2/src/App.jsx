@@ -3,7 +3,7 @@ import { useState , useEffect } from "react";
 import Action from "./Components/Action";
 import Inventory from "./Components/Inventory";
 
-import { actionList , meetsRequirements} from './gameLogic';
+import { actionList , findAction , meetsRequirements} from './gameLogic';
 
 function App()
 {
@@ -19,7 +19,7 @@ function App()
       return;
     }
 
-    const action = actionList.find(action => action.source === source);
+    const action = findAction(source);
 
     if( !action || !meetsRequirements(action, inventory, selectedItem))
       return;
@@ -32,7 +32,7 @@ function App()
     if( activeAction === null) 
       return;
 
-    const action = actionList.find(action => action.source === activeAction);
+    const action = findAction(source);
 
     if( !action || !meetsRequirements(action, inventory, selectedItem))
       setActiveAction(null);
@@ -44,13 +44,22 @@ function App()
 
       <Inventory inventory = {inventory} />
       
-      { 
-        actionList.map(action => <Action 
-        key = {action.source} 
-        action = {action} activeAction = {activeAction} onActivation = {toggleAction} 
-        setInventory = {setInventory}
-        selectedItem = {selectedItem} onItemSelect = {setSelectedItem} />)
-      }
+      {
+        Object.entries(actionList).map(([category, actions]) => (
+          <section key = {category}>
+            
+            <h2>{category}</h2>
+      
+            { 
+              actions.map(action => <Action 
+              key = {action.source} 
+              action = {action} activeAction = {activeAction} onActivation = {toggleAction} 
+              setInventory = {setInventory}
+              selectedItem = {selectedItem} onItemSelect = {setSelectedItem} />)
+            }
+
+          </section>
+      ))}
 
     </>
   );

@@ -24,6 +24,7 @@ function Action( { action , activeAction , onActivation , setInventory , selecte
 
   return (
     <div>
+
         <h3>{action.source}</h3>
 
         { 
@@ -35,6 +36,7 @@ function Action( { action , activeAction , onActivation , setInventory , selecte
         }
 
         <button onClick = {() => onActivation(action.source)}>{isActive ? "Stop Generating" : "Start Generating"}</button>
+        
     </div>
   );
 }

@@ -1,50 +1,62 @@
 /* Game Actions and Items*/
 export const actionList = 
-[
-  { 
-    source: "Normal Tree" , 
-    action: "Cut" , 
-    produces: { itemId: 1 , quantity: 1 } , 
-    tick: 900 
-  },
+{
+  woodcutting: 
+  [
+    { 
+      source: "Normal Tree" , 
+      action: "Cut" , 
+      produces: { itemId: 1 , quantity: 1 } , 
+      tick: 900 
+    },
 
-  { 
-    source: "Oak Tree" , 
-    action: "Cut" , 
-    produces: { itemId: 2 , quantity: 1 } , 
-    tick: 1200 
-  },
+    { 
+      source: "Oak Tree" , 
+      action: "Cut" , 
+      produces: { itemId: 2 , quantity: 1 } , 
+      tick: 1200 
+    },
 
-  { 
-    source: "Willow Tree" , 
-    action: "Cut" , 
-    produces: { itemId: 3 , quantity: 1 } , 
-    tick: 1500 
-  },
+    { 
+      source: "Willow Tree" , 
+      action: "Cut" , 
+      produces: { itemId: 3 , quantity: 1 } , 
+      tick: 1500 
+    }
+  ],
 
-  { 
-    source: "Firemaking" , 
-    action: "Burn" , 
-    requiresAny: [ { itemId: 1 , quantity: 2 } , { itemId: 2 , quantity: 2 } , { itemId: 3 , quantity: 2 } ] , 
-    produces: { itemId: 4 , quantity: 1 } , 
-    tick: 2000 
-  }, 
-
-  {
+  fishing: 
+  [
+    {
     source: "Raw Shrimp" ,
     action: "Fish" ,
     produces: { itemId: 5 , quantity: 2 } ,
     tick: 2500
-  },
+    }
+  ],
 
-  {
-    source: "Cooked Shrimp" ,
-    action: "Cook" ,
-    requires: { itemId: 5 , quantity: 1 } ,
-    produces: { itemId: 6 , quantity: 1 } ,
-    tick: 3000
-  }
-];
+  firemaking:
+  [
+    { 
+      source: "Firemaking" , 
+      action: "Burn" , 
+      requiresAny: [ { itemId: 1 , quantity: 2 } , { itemId: 2 , quantity: 2 } , { itemId: 3 , quantity: 2 } ] , 
+      produces: { itemId: 4 , quantity: 1 } , 
+      tick: 2000 
+    }
+  ],
+
+  cooking:
+  [
+    {
+      source: "Cooked Shrimp" ,
+      action: "Cook" ,
+      requires: { itemId: 5 , quantity: 1 } ,
+      produces: { itemId: 6 , quantity: 1 } ,
+      tick: 3000
+    }
+  ]
+};
 
 export const itemList = 
 [
@@ -58,6 +70,11 @@ export const itemList =
 
 
 /* Helper Functions */
+export function findAction(source)
+{
+  return Object.values(actionList).flat().find(action => action.source === source);
+}
+
 export function meetsRequirements(action, inventory, selectedItem)
 {
   if( action.requires)
@@ -84,7 +101,7 @@ export function meetsRequirements(action, inventory, selectedItem)
 
 export function updateInventory(source, currentInventory, selectedItem)
 {
-  const action = actionList.find(action => action.source === source);
+  const action = findAction(source);
 
   if( !action || !meetsRequirements(action, currentInventory, selectedItem))
     return currentInventory;
