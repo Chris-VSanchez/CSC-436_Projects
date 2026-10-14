@@ -11,7 +11,7 @@ This is a real website for a real club, and it looks like one. The purple-to-blu
 
 The gaps are mostly in the HTML. Neither page has a `<main>`. Each page has two `h1`s. The nav links are bare anchors instead of a list, and "Games" goes to `#`. The brand puts a `<p>` inside a `<span>`, which is each page's validator error, and the About page jumps from `h1` to `h3`. The four leader images are injected with no `alt` at all, and the `<html>` tag has no `lang`. There are no real images on the site, only one decorative SVG reused four times. In the CSS, the palette is typed by hand, the About paragraphs use `<br>` for line breaks, which reads raggedly on a phone, and the buttons have no focus style.
 
-One more thing, said plainly. On the September 15 deadline, `Project 1/` held a 71-line page with a header, a hero and the marquee. The leader grid, the footer, the About page, all of the JavaScript and the Netlify deploy arrived between September 21 and October 3. Your instructor is handling the timing; this review grades the finished site.
+One more thing, said plainly. On the September 15 deadline, `Project 1/` held a 71-line page with a header, a hero and the marquee. The leader grid, the footer, the About page, all of the JavaScript and the Netlify deploy arrived between September 21 and October 3. You had an extension, so the timing does not count against you; this review grades the finished site.
 
 ## What the numbers looked like
 
@@ -105,7 +105,7 @@ One more thing, said plainly. On the September 15 deadline, `Project 1/` held a 
 
 ### What to change
 
-- **The timing.** On September 15 the folder held the header, the hero and the marquee. The leader grid, footer, About page, script and deploy came between September 21 and October 3. Your instructor is handling that separately. For Project 2, the habit to build is shipping a working core by the deadline and polishing afterward.
+- **The timing, for the record.** On September 15 the folder held the header, the hero and the marquee. The leader grid, footer, About page, script and deploy came between September 21 and October 3. You had an extension, so this costs nothing. For Project 2, the habit to build is still shipping a working core early and polishing afterward.
 
   ```mermaid
   flowchart LR
