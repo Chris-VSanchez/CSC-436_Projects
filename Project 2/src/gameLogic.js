@@ -4,44 +4,103 @@ export const actionList =
   woodcutting: 
   [
     { 
-      source: "Normal Tree" , 
-      action: "Cut" , 
-      produces: { itemId: 1 , quantity: 1 } , 
+      source: "Oak Tree", 
+      action: "Cut", 
+      produces: { itemId: 1 , quantity: 1 }, 
       tick: 900 
     },
 
     { 
-      source: "Oak Tree" , 
-      action: "Cut" , 
-      produces: { itemId: 2 , quantity: 1 } , 
+      source: "Maple Tree", 
+      action: "Cut", 
+      produces: { itemId: 2 , quantity: 1 }, 
       tick: 1200 
     },
 
     { 
-      source: "Willow Tree" , 
-      action: "Cut" , 
-      produces: { itemId: 3 , quantity: 1 } , 
+      source: "Mahogany Tree", 
+      action: "Cut", 
+      produces: { itemId: 3 , quantity: 1 }, 
       tick: 1500 
+    },
+    
+    { 
+      source: "Magic Tree", 
+      action: "Cut", 
+      produces: { itemId: 4 , quantity: 1 }, 
+      tick: 1600 
     }
   ],
 
   fishing: 
   [
     {
-    source: "Raw Shrimp" ,
-    action: "Fish" ,
-    produces: { itemId: 5 , quantity: 2 } ,
-    tick: 2500
+      source: "Raw Shrimp",
+      action: "Fish",
+      produces: { itemId: 5 , quantity: 2 },
+      tick: 3300
+    },
+
+    { 
+      source: "Raw Salmon", 
+      action: "Fish", 
+      produces: { itemId: 6 , quantity: 1 }, 
+      tick: 3300 
+    },
+
+    { 
+      source: "Raw Lobster", 
+      action: "Fish", 
+      produces: { itemId: 7 , quantity: 2 }, 
+      tick: 4000
+    },
+
+    { 
+      source: "Raw Swordfish", 
+      action: "Fish", 
+      produces: { itemId: 8 , quantity: 1 }, 
+      tick: 4000 
+    },
+
+    { 
+      source: "Catfish", 
+      action: "Fish", 
+      produces: { itemId: 9 , quantity: 1 }, 
+      tick: 8000 
     }
   ],
 
   firemaking:
   [
     { 
-      source: "Firemaking" , 
-      action: "Burn" , 
-      requiresAny: [ { itemId: 1 , quantity: 2 } , { itemId: 2 , quantity: 2 } , { itemId: 3 , quantity: 2 } ] , 
-      produces: { itemId: 4 , quantity: 1 } , 
+      source: "Firemaking", 
+      action: "Burn", 
+      requiresAny: 
+      [ 
+        { 
+          itemId: 1, 
+          quantity: 2,
+          produces: { itemId: 10 , quantity: 1 }
+        }, 
+
+        { 
+          itemId: 2, 
+          quantity: 2,
+          produces: { itemId: 10 , quantity: 2 }
+        }, 
+
+        { 
+          itemId: 3, 
+          quantity: 1, 
+          produces: { itemId: 10 , quantity: 2 }
+        },
+
+        { 
+          itemId: 4, 
+          quantity: 2, 
+          produces: { itemId: 10 , quantity: 3 }
+        }
+      ], 
       tick: 2000 
     }
   ],
@@ -49,23 +108,64 @@ export const actionList =
   cooking:
   [
     {
-      source: "Cooked Shrimp" ,
-      action: "Cook" ,
-      requires: { itemId: 5 , quantity: 1 } ,
-      produces: { itemId: 6 , quantity: 1 } ,
+      source: "Cooking",
+      action: "Cook",
+      requiresAny: 
+      [ 
+        { 
+          itemId: 5, 
+          quantity: 1,
+          produces: { itemId: 11 , quantity: 1 }
+        }, 
+
+        { 
+          itemId: 6, 
+          quantity: 1,
+          produces: { itemId: 12 , quantity: 1 }
+        }, 
+
+        { 
+          itemId: 7, 
+          quantity: 1, 
+          produces: { itemId: 13 , quantity: 1 }
+        },
+
+        { 
+          itemId: 8, 
+          quantity: 1, 
+          produces: { itemId: 14 , quantity: 1 }
+        }
+      ], 
       tick: 3000
+    },
+
+    {
+      source: "Cat",
+      action: "Convert",
+      requires: { itemId: 9, quantity: 1 },
+      produces: { itemId: 15, quantity: 1 },
+      tick: 10000
     }
   ]
 };
 
 export const itemList = 
 [
-  { id: 1, itemName: "Normal Logs" },
-  { id: 2, itemName: "Oak Logs" },
-  { id: 3, itemName: "Willow Logs" },
-  { id: 4, itemName: "Ash" },
-  { id: 5, itemName: "Raw Shrimp"},
-  { id: 6, itemName: "Cooked Shrimp"}
+  { id: 1, itemName: "Oak Logs" },
+  { id: 2, itemName: "Maple Logs" },
+  { id: 3, itemName: "Mahogany Logs" },
+  { id: 4, itemName: "Magic Logs" },
+  { id: 5, itemName: "Raw Shrimp" },
+  { id: 6, itemName: "Raw Salmon" },
+  { id: 7, itemName: "Raw Lobster" },
+  { id: 8, itemName: "Raw Swordfish" },
+  { id: 9, itemName: "Catfish" },
+  { id: 10, itemName: "Ash" },
+  { id: 11, itemName: "Cooked Shrimp" },
+  { id: 12, itemName: "Cooked Salmon" },
+  { id: 13, itemName: "Cooked Lobster" },
+  { id: 14, itemName: "Cooked Swordfish" },
+  { id: 15, itemName: "Cat" }
 ];
 
 
@@ -73,6 +173,16 @@ export const itemList =
 export function findAction(source)
 {
   return Object.values(actionList).flat().find(action => action.source === source);
+}
+
+export function getRecipe(multipleRecipes, itemId)
+{
+  return multipleRecipes.find(item => item.itemId === itemId);
+}
+
+export function getItem(itemId)
+{
+  return itemList.find(item => item.id === itemId);
 }
 
 export function meetsRequirements(action, inventory, selectedItem)
@@ -107,6 +217,7 @@ export function updateInventory(source, currentInventory, selectedItem)
     return currentInventory;
 
   let updatedInventory = currentInventory;
+  let output = action.produces;
 
   if( action.requires)
     updatedInventory = removeItem(action.requires.itemId, action.requires.quantity, updatedInventory);
@@ -116,9 +227,11 @@ export function updateInventory(source, currentInventory, selectedItem)
     const requirement = action.requiresAny.find(item => item.itemId === selectedItem);
     
     updatedInventory = removeItem(requirement.itemId, requirement.quantity, updatedInventory);
+
+    output = requirement.produces;
   }
 
-  updatedInventory = addItem(action.produces.itemId, action.produces.quantity, updatedInventory);
+  updatedInventory = addItem(output.itemId, output.quantity, updatedInventory);
 
   return updatedInventory;
 }

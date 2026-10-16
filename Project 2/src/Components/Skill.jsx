@@ -7,7 +7,7 @@ function Skill( { skill , actions , activeAction , onActivation , setInventory ,
                 
       <h2>{skill}</h2>
     
-      <div>
+      <div style = {{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))"}}>
         { 
             actions.map(action => <Action
             key = {action.source} 
