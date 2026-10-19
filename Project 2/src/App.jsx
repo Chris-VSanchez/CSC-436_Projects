@@ -55,6 +55,14 @@ function App()
         selectedItems = {selectedItems} onItemSelect = {setSelectedItems} />))
       }
 
+      <footer className = "skill">
+
+        <a href = "#">&lt; Project 1</a>
+        <p>A game by Chris Sanchez</p>
+        <a href = "#">Project 3 &gt;</a>
+
+      </footer>
+
     </>
   );
 }

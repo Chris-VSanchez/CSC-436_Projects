@@ -1,0 +1,9 @@
+/* Import Sen Font */
+@import url("https://fonts.googleapis.com/css2?family=Sen&display=swap");
+
+*, *::before, *::after 
+{
+    font-family: Sen, sans-serif;
+    
+    box-sizing: border-box;
+}

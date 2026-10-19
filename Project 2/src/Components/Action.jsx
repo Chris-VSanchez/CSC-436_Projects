@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
-import ItemSelector from './ItemSelector'
-import Item from './Item'
 
-import { getRecipe , getItem , updateInventory } from '../gameLogic';
+import Item from './Item'
+import ItemSelector from './ItemSelector'
+
+import { getRecipe , updateInventory } from '../gameLogic';
 import './components.css'
 
 function Action( { action , activeAction , onActivation , setInventory , selectedItems , onItemSelect } )
@@ -32,9 +33,9 @@ function Action( { action , activeAction , onActivation , setInventory , selecte
   } , [isActive, action.source, action.tick, setInventory, selectedItem]);
 
   return (
-    <div>
+    <div className = {`action-card ${action.action.toLowerCase()}`}>
         
-      <div>
+      <div className = 'action-details'>
       
         <p>{action.action}</p>
         <h3>{action.source}</h3>
@@ -102,7 +103,8 @@ function Action( { action , activeAction , onActivation , setInventory , selecte
         </>)
       }
 
-        <button onClick = {() => onActivation(action.source)}>{isActive ? "Stop Generating" : "Start Generating"}</button>
+        <button className = {isActive ? "btn-stop" : "btn-start"}
+        onClick = {() => onActivation(action.source)}>{isActive ? "Stop Generating" : "Start Generating"}</button>
 
     </div>
   );

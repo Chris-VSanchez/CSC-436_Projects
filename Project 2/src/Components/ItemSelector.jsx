@@ -1,9 +1,12 @@
 import { itemList } from "../gameLogic"
 
+import './components.css'
+
 function ItemSelector( { requirements , selectedItem , onItemSelect } )
 {
   return (
-    <select value = {selectedItem ?? ""} onChange = {e => onItemSelect(Number(e.target.value))}>
+    <select className = "dropdown"
+    value = {selectedItem ?? ""} onChange = {e => onItemSelect(Number(e.target.value))}>
 
       <option value = "" disabled> Choose an item</option>
     

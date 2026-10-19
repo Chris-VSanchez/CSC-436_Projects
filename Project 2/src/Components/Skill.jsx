@@ -1,13 +1,15 @@
 import Action from './Action'
 
+import './components.css'
+
 function Skill( { skill , actions , activeAction , onActivation , setInventory , selectedItems , onItemSelect } )
 {
   return (
     <section>
                 
-      <h2>{skill}</h2>
+      <h2 className = {`skill ${skill.toLowerCase()}`}>{skill}</h2>
     
-      <div style = {{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))"}}>
+      <div className = "actions">
         { 
             actions.map(action => <Action
             key = {action.source} 

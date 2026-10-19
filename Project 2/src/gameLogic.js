@@ -1,9 +1,13 @@
+/* Image Imports */
+import catImage from './Assets/cat.png';
+import catfishImage from './Assets/catfish.png';
+
 /* Game Actions and Items*/
 export const actionList = 
 {
   woodcutting: 
   [
-    { 
+    {
       source: "Oak Tree", 
       action: "Cut", 
       produces: { itemId: 1 , quantity: 1 }, 
@@ -42,7 +46,7 @@ export const actionList =
     },
 
     { 
-      source: "Raw Salmon", 
+      source: "Raw Carp", 
       action: "Fish", 
       produces: { itemId: 6 , quantity: 1 }, 
       tick: 3300 
@@ -151,21 +155,95 @@ export const actionList =
 
 export const itemList = 
 [
-  { id: 1, itemName: "Oak Logs" },
-  { id: 2, itemName: "Maple Logs" },
-  { id: 3, itemName: "Mahogany Logs" },
-  { id: 4, itemName: "Magic Logs" },
-  { id: 5, itemName: "Raw Shrimp" },
-  { id: 6, itemName: "Raw Salmon" },
-  { id: 7, itemName: "Raw Lobster" },
-  { id: 8, itemName: "Raw Swordfish" },
-  { id: 9, itemName: "Catfish" },
-  { id: 10, itemName: "Ash" },
-  { id: 11, itemName: "Cooked Shrimp" },
-  { id: 12, itemName: "Cooked Salmon" },
-  { id: 13, itemName: "Cooked Lobster" },
-  { id: 14, itemName: "Cooked Swordfish" },
-  { id: 15, itemName: "Cat" }
+  { 
+    id: 1, 
+    itemName: "Oak Logs", 
+    image: "https://cdn2-main.melvor.net/assets/media/bank/logs_oak.png" 
+  },
+
+  { 
+    id: 2, 
+    itemName: "Maple Logs",
+    image: "https://cdn2-main.melvor.net/assets/media/bank/logs_maple.png" 
+  },
+  
+  { 
+    id: 3, 
+    itemName: "Mahogany Logs", 
+    image: "https://cdn2-main.melvor.net/assets/media/bank/logs_mahogany.png" 
+  },
+  
+  { 
+    id: 4, 
+    itemName: "Magic Logs", 
+    image: "https://cdn2-main.melvor.net/assets/media/bank/logs_magic.png" 
+  },
+  
+  { 
+    id: 5, 
+    itemName: "Raw Shrimp", 
+    image: "https://cdn2-main.melvor.net/assets/media/bank/shrimp.png" 
+  },
+  
+  { 
+    id: 6, 
+    itemName: "Raw Carp", 
+    image: "https://cdn2-main.melvor.net/assets/media/bank/carp.png" 
+  },
+  
+  { 
+    id: 7, 
+    itemName: "Raw Lobster", 
+    image: "https://cdn2-main.melvor.net/assets/media/bank/lobster.png" 
+  },
+  
+  { 
+    id: 8, 
+    itemName: "Raw Swordfish", 
+    image: "https://cdn2-main.melvor.net/assets/media/bank/swordfish.png" 
+  },
+  
+  { 
+    id: 9, 
+    itemName: "Catfish",
+    image: catfishImage
+  },
+  
+  { 
+    id: 10, 
+    itemName: "Ash",
+    image: "https://cdn2-main.melvor.net/assets/media/bank/ashes.png"
+  },
+  
+  { 
+    id: 11, 
+    itemName: "Cooked Shrimp",
+    image: "https://cdn2-main.melvor.net/assets/media/bank/shrimp_cooked.png" 
+  },
+  
+  { 
+    id: 12, 
+    itemName: "Cooked Carp",
+    image: "https://cdn2-main.melvor.net/assets/media/bank/carp_cooked.png"
+  },
+  
+  { 
+    id: 13, 
+    itemName: "Cooked Lobster",
+    image: "https://cdn2-main.melvor.net/assets/media/bank/lobster_cooked.png"
+  },
+  
+  { 
+    id: 14, 
+    itemName: "Cooked Swordfish",
+    image: "https://cdn2-main.melvor.net/assets/media/bank/swordfish_cooked.png"
+  },
+  
+  { 
+    id: 15, 
+    itemName: "Cat",
+    image: catImage
+  }
 ];
 
 
